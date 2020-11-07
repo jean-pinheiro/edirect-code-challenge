@@ -1,0 +1,31 @@
+{
+  "name": "edirect-code-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "'An EdirectInsure Code Challenge'",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jean-pinheiro/edirect-code-challenge.git"
+  },
+  "author": "Jean Pinheiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jean-pinheiro/edirect-code-challenge/issues"
+  },
+  "homepage": "https://github.com/jean-pinheiro/edirect-code-challenge#readme",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
