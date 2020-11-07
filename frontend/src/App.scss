@@ -1,0 +1,27 @@
+$yellow: #FFC12C ;
+$light-blue: #007cba;
+$dark-blue:#006ba1;
+$light-grey: #f1f2f4;
+$red: #EE4525;
+ 
+.navbar{
+  background-color: $yellow;
+  .navbar-brand{
+    color: $light-blue !important;
+  }
+}
+ 
+.tasks_list{
+  margin-top: 40px;
+  .title{
+    font-size: 22px;
+    color: $light-blue;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+ 
+  .card{
+    background-color: $light-grey;
+  }
+}
+
