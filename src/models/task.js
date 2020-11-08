@@ -13,7 +13,8 @@ const taskSchema = new Schema({
     },
     done:{
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     finishDate: {
         type: String

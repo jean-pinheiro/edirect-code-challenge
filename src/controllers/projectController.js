@@ -21,17 +21,27 @@ class projectController{
   }
 
   async addProject(req, res){
-    const userId = req.params.userId;
     try {
-      var user = await User.findById({userId});
-      var newProject = new Project(req.body);
+      var user = await User.findById({_id: req.params.userId});
+      var newProject = new Project({name: req.body.projectName});
       newProject.user = user;
       await newProject.save();
-      user.projects.push(newProject);
+      user.projects.push(newProject._id);
       await user.save();
       return res.status(201).json(newProject);
     } catch (error) {
       res.status(500).json({message: "Mongo error: "+error})
+    }
+  }
+
+  async deleteProject(req, res){
+    try {
+      console.log(req.params.projectId);
+      await Project.findOneAndRemove({_id: req.params.projectId});
+      await User.update({"projects": req.params.projectId}, { "$pull": { "projects": req.params.projectId }});
+      return res.status(200).json({success: true});
+    } catch (error) {
+      res.status(500).json({succes: false, message: "Mongo error: "+error})
     }
   }
 }

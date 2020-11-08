@@ -14,9 +14,9 @@ class TaskService {
     return projects;
   }
 
-  async add(projectId, project) {
+  async add(projectId, taskDescription) {
     
-    const addResponse = await axios.post(API_URL + `api/task/add/${projectId}`, project, defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/task/add/${projectId}`, {taskDescription}, defaultConfig()).then(response =>{
         return response.data;
     }).catch(error =>{
         console.log(error);
@@ -28,7 +28,7 @@ class TaskService {
 
   async finish(taskId) {
     
-    const addResponse = await axios.post(API_URL + `api/task/finish/${taskId}`, {}, defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/task/finish/${taskId}`,  defaultConfig()).then(response =>{
         return response.data;
     }).catch(error =>{
         console.log(error);
@@ -40,7 +40,7 @@ class TaskService {
 
   async delete(taskId) {
     
-    const addResponse = await axios.post(API_URL + `api/task/delete/${taskId}`, {}, defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/task/delete/${taskId}`,  defaultConfig()).then(response =>{
         return response.data;
     }).catch(error =>{
         console.log(error);

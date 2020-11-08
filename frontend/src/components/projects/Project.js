@@ -45,7 +45,7 @@ class Project extends Component {
                 <span><Link to="/"> <span className="link_back"> Back to Project List</span></Link></span>  
               </Col>
             </Row>
-            <Tasks projectID={id} tasks={tasks} getTasks={this.getTasks} />
+            <Tasks projectId={id} tasks={tasks} getTasks={this.getTasks} />
           </Container>
         </div>
       );

@@ -19,18 +19,17 @@ class taskController{
 
   async addTask(req, res){
     try {
-      console.log(req.params.projectId);
-      var project = await Project.findById({_id: req.params.projectId});
-      var addTask = {
-        description: 'Task Three',
+      
+      const project = await Project.findById({_id: req.params.projectId});
+      const addTask = {
+        description: req.body.taskDescription,
         creationDate: moment().toISOString(),
-        done:false,
         finishDate: '',   
       };
-      var newTask = new Task(addTask);
+      const newTask = new Task(addTask);
       newTask.project = project;
       await newTask.save();
-      project.tasks.push(newTask);
+      project.tasks.push(newTask._id);
       await project.save();
       return res.status(201).json(newTask);
     } catch (error) {

@@ -10,10 +10,11 @@ const projectRoute = require('./src/routes/projectRoute');
 const bodyParser = require('body-parser');
 const port = process.env.PORT;
 app.use(cors())
-   .use('/api/task', taskRoute)
-   .use('/api/project', projectRoute)
-   .use(bodyParser.urlencoded({ extended: true }));
+.use(bodyParser.json({ limit: '300mb' }))
+.use('/api/task', taskRoute)
+.use('/api/project', projectRoute);
 
+//.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res)=> {
     res.send('EDIRECT CODING CHALLENGE ');
 });

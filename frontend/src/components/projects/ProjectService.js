@@ -15,9 +15,9 @@ class ProjectService {
     return projects;
   }
 
-  async add(userId, project) {
+  async add(userId, projectName) {
     
-    const addResponse = await axios.post(API_URL + `api/project/add/${userId}`, project, defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/project/add/${userId}`, {projectName}, defaultConfig()).then(response =>{
         console.log(response.data);
         return response.data;
     }).catch(error =>{

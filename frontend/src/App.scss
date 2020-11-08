@@ -43,10 +43,37 @@ $red: #EE4525;
   border: none;
 }
 
-.task_done{
-  text-decoration: line-through;
-}
 
 .error_msg{
   color: $red;
+}
+
+.task_done {
+   position: relative;
+  display: inline-block;
+  text-decoration: line-through
+}
+
+.task_done .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: $yellow;
+  color: $light-blue;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+}
+
+.task_done:hover .tooltiptext {
+  visibility: visible;
+}
+
+.projectIcons{
+  float: right;
 }
