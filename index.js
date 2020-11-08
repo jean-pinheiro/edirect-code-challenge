@@ -1,12 +1,18 @@
 require('dotenv').config();
 const express = require('express'); 
 const app = express();
-require('./config/mongo');
+const cors = require('cors');
+require('./src/config/mongo');
 
-const port = process.env.PORT;
+const taskRoute = require('./src/routes/taskRoute');
+const projectRoute = require('./src/routes/projectRoute');
+
 const bodyParser = require('body-parser');
-
-app.use(bodyParser.urlencoded({ extended: true }));
+const port = process.env.PORT;
+app.use(cors())
+   .use('/api/task', taskRoute)
+   .use('/api/project', projectRoute)
+   .use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res)=> {
     res.send('EDIRECT CODING CHALLENGE ');

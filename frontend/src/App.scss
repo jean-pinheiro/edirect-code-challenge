@@ -11,17 +11,42 @@ $red: #EE4525;
   }
 }
  
-.tasks_list{
+.list{
   margin-top: 40px;
-  .title{
+  
+  .title, ul{
     font-size: 22px;
     color: $light-blue;
     font-weight: 600;
     margin-bottom: 4px;
-  }
- 
+  }  
+  
   .card{
     background-color: $light-grey;
   }
+  .card span{
+    margin-left: 10px;
+  }
+  
+  ul{    
+    list-style: none;    
+  }
 }
 
+.project_title{
+
+  margin-left: 10px;
+  font-size: 1.2em;
+}
+
+.table tr:first-child td {
+  border: none;
+}
+
+.task_done{
+  text-decoration: line-through;
+}
+
+.error_msg{
+  color: $red;
+}

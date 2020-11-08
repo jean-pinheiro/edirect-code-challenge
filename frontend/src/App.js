@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import Container from 'react-bootstrap/Container';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import './App.scss';
-import Tasks from './components/tasks/Tasks';
+import ProjectList from './components/projects/ProjectList';
+import Project from './components/projects/Project';
 import Header from './components/header/Header';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheckCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-
-library.add(faCheckCircle, faTrashAlt)
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <Header/>
-        <Container>
-          <Tasks/>
-        </Container>
-      </div>
-    );
+      <>
+      <Header/>
+      <Router>
+      <Switch>
+        <Route exact path='/' component={ProjectList}/> 
+        <Route path='/project/:name/:id' exact component={Project}/>
+        <Redirect to="/" />
+      </Switch>
+    </Router>
+      </>
+    )
   }
 }
 

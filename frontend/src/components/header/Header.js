@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTasks } from '@fortawesome/free-solid-svg-icons';
 
 class Header extends Component {
   render() {
@@ -8,7 +9,7 @@ class Header extends Component {
       <div>
         <Navbar>
           <Navbar.Brand>
-            <FontAwesomeIcon icon="check-circle" size="lg" />  Project Tasks Management
+            <FontAwesomeIcon icon={faTasks}/>  <span className="project_title">Project Tasks Management</span>
              </Navbar.Brand>
         </Navbar>
       </div>
