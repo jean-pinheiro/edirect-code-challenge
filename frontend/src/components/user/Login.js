@@ -28,12 +28,9 @@ class Login extends Component {
         const {user} = this.state;
         if(user !== {}){
             const loginResponse = await UserService.login(user);
-            console.log(loginResponse);
             if (loginResponse.fetchError) {
                 this.setState({ fetchError: true, error: loginResponse.fetchError.errorMsg })
             }else if(loginResponse.auth){
-                console.log(localStorage.getItem('authToken'));
-
                 window.location="/projects";
             }          
         } else{

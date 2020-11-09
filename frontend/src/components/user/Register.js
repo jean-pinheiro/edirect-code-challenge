@@ -33,7 +33,6 @@ class Register extends Component {
               this.setState({error:"The passwords are different!"})           
           }else{
             const registerResponse = await UserService.register(user);
-            console.log(registerResponse);
             if (registerResponse.fetchError) {
                 this.setState({ fetchError: true, error: registerResponse.fetchError.errorMsg })
             }else{

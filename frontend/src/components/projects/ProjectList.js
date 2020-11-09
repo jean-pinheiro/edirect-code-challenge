@@ -32,7 +32,6 @@ class ProjectList extends Component {
     if (projects.fetchError) {
       this.setState({ fetchError: true, fetchMsg: " again later" });
     } else {
-      console.log(projects);
       this.setState({ projects });
     }
   }
@@ -53,7 +52,6 @@ class ProjectList extends Component {
 
   async handleAddProjectSubmit(e){
     e.preventDefault();
-    console.log(this.state)
     const {projectName} = this.state;
     if(projectName !== ''){
 
@@ -70,7 +68,7 @@ class ProjectList extends Component {
   componentDidMount() {    
     const user = UserService.getCurrentUser();
     if(user){
-      this.setState({userId: user.authUser._id}, function () { console.log(this.state)});
+      this.setState({userId: user.authUser._id});
       this.listProjects();
     }else{
         window.location='/login';

@@ -24,7 +24,6 @@ class TaskList extends Component {
     this.setState({ fetchError: false, fetchMsg: '' });
 
     const finishResponse = await TaskService.finish(taskId);
-    console.log(finishResponse);
     if (finishResponse.fetchError) {
       this.setState({ fetchError: true, fetchMsg: finishResponse.fetchError.errorMsg })
     }

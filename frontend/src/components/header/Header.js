@@ -19,7 +19,6 @@ class Header extends Component {
 
   setinfoUser() {
     const user = UserService.getCurrentUser();
-    console.log(user);
     if(user){
       this.setState({username: user.authUser.username, showInfoUser: true})
     }

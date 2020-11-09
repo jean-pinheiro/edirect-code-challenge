@@ -5,10 +5,8 @@ class ProjectService {
 
   async list(userId) {
     const projects = await axios.get(API_URL + `api/project/list/${userId}`, defaultConfig()).then(response =>{
-        console.log(response.data);
         return response.data;
     }).catch(error =>{
-        console.log(error);
         return {fetchError: {error}};
     });
 
@@ -18,10 +16,8 @@ class ProjectService {
   async add(userId, projectName) {
     
     const addResponse = await axios.post(API_URL + `api/project/add/${userId}`, {projectName}, authConfig()).then(response =>{
-        console.log(response.data);
         return response.data;
     }).catch(error =>{
-        console.log(error);
         return {fetchError: {error, errorMsg: "add project again later"}};
     });
     
@@ -31,10 +27,8 @@ class ProjectService {
   async delete(projectId) {
     
     const addResponse = await axios.post(API_URL + `api/project/delete/${projectId}`, {}, authConfig()).then(response =>{
-        console.log(response.data);
         return response.data;
     }).catch(error =>{
-        console.log(error);
         return {fetchError: {error, errorMsg: "delete project again later"}};
     });
     
