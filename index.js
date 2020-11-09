@@ -4,17 +4,18 @@ const app = express();
 const cors = require('cors');
 require('./src/config/mongo');
 
-const userRoute = require('./src/routes/userRoute');
 const taskRoute = require('./src/routes/taskRoute');
 const projectRoute = require('./src/routes/projectRoute');
+const userRoute = require('./src/routes/userRoute');
 
 const bodyParser = require('body-parser');
 const port = process.env.PORT;
 app.use(cors())
-.use(bodyParser.json({ limit: '300mb' }))
-.use('/api/user', userRoute)
+.use(bodyParser.json())
+.use(bodyParser.urlencoded({ extended: true }))
 .use('/api/task', taskRoute)
-.use('/api/project', projectRoute);
+.use('/api/project', projectRoute)
+.use('/api/user', userRoute);
 
 //.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res)=> {

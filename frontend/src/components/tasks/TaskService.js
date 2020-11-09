@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL, defaultConfig} from '../../config/apiConfig';
+import {API_URL, defaultConfig, authConfig} from '../../config/apiConfig';
 
 class TaskService {
 
@@ -16,7 +16,7 @@ class TaskService {
 
   async add(projectId, taskDescription) {
     
-    const addResponse = await axios.post(API_URL + `api/task/add/${projectId}`, {taskDescription}, defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/task/add/${projectId}`, {taskDescription}, authConfig()).then(response =>{
         return response.data;
     }).catch(error =>{
         console.log(error);
@@ -28,7 +28,7 @@ class TaskService {
 
   async finish(taskId) {
     
-    const addResponse = await axios.post(API_URL + `api/task/finish/${taskId}`,  defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/task/finish/${taskId}`,  authConfig()).then(response =>{
         return response.data;
     }).catch(error =>{
         console.log(error);
@@ -40,7 +40,7 @@ class TaskService {
 
   async delete(taskId) {
     
-    const addResponse = await axios.post(API_URL + `api/task/delete/${taskId}`,  defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/task/delete/${taskId}`,  authConfig()).then(response =>{
         return response.data;
     }).catch(error =>{
         console.log(error);

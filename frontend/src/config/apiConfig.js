@@ -19,3 +19,12 @@ export function defaultConfig() {
     'Content-Type': 'application/json' } 
   }
 }
+
+export function authConfig() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  return {
+    headers: { 'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'x-access-token': user.token } 
+  }
+}
