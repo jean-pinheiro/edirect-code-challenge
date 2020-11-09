@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import { Form, Button, Row , Col, Container, Card} from 'react-bootstrap';
+
 import ProjectService from './ProjectService'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Card from 'react-bootstrap/Card';
-import { Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { faFolder, faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 

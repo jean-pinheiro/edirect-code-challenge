@@ -5,15 +5,9 @@ const Project = require("../models/project");
 class projectController{
 
   async listProjects(req, res){
-    const userId = req.params.userId;
-    console.log(userId);
+
     try {
-      var user = await User.findById({_id: userId}).populate('projects');
-      var projects = user.projects;
-      /* console.log('projects');
-      console.log(projects);
-      console.log('typeof projects');
-      console.log(typeof projects); */
+      var user = await User.findById({_id: req.params.userId}).populate('projects');
       return res.status(200).json(user.projects);
     } catch (error) {
       res.status(500).json({message: "find document error: "+error})

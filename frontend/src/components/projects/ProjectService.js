@@ -30,7 +30,7 @@ class ProjectService {
 
   async delete(projectId) {
     
-    const addResponse = await axios.post(API_URL + `api/project/delete/${projectId}`, {}, defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/project/delete/${projectId}`, defaultConfig()).then(response =>{
         console.log(response.data);
         return response.data;
     }).catch(error =>{

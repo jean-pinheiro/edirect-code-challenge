@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Card from 'react-bootstrap/Card';
-import Table from 'react-bootstrap/Table';
+import {Card, Table} from 'react-bootstrap';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import TaskService from './TaskService';
