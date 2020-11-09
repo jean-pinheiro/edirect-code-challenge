@@ -33,7 +33,7 @@ class Tasks extends Component {
       await TaskService.add(this.props.projectId, taskDescription); 
       this.props.getTasks(); 
       }catch(error){
-        this.setState({fetchError: true, fetchMsg: addResponse.fetchError.errorMsg});
+        this.setState({fetchError: true, fetchMsg: error.errorMsg});
       }
       
     }else{

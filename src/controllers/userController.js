@@ -12,7 +12,11 @@ class userController{
                               password: req.body.user.password,
                     });
       newUser.save();
-      return res.status(200).json(newUser);
+      const id = newUser._id;
+      var token = jwt.sign({ id }, process.env.TOKEN, {
+        expiresIn: 3000
+      });
+      return res.json({ auth: true, token, authUser: {username: newUser.username, _id:newUser._id, projects: newUser.projects } });
     } catch (error) {
       res.status(500).json({message: "Mongo error: "+error})
     }

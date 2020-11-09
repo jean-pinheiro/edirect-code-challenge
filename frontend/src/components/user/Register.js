@@ -34,7 +34,7 @@ class Register extends Component {
           }else{
               try {
                   await UserService.register(user);
-                  window.location="/";
+                  window.location="/projects";
               } catch (error) {
                 this.setState({ fetchError: true, error: error.errorMsg })
               }
