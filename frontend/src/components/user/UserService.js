@@ -3,22 +3,20 @@ import {API_URL, defaultConfig} from '../../config/apiConfig';
 
 class UserService {
 
-  async register(user) {
-      console.log(user);
-      const register = await axios.post(API_URL + 'api/user/register', {user}, defaultConfig()).then(response =>{
+  register(user) {
+    
+      return axios.post(API_URL + 'api/user/register', {user}, defaultConfig()).then(response =>{
         return response.data;
       }).catch(error =>{
 
         return {fetchError: {error, errorMsg: 'Please Try Again Later'}};
     });
 
-    return register;
   }
 
-  async login(user) {
-    console.log(user);
-    const login = await axios.post(API_URL + 'api/user/login', {user}, defaultConfig()).then(response =>{
-      console.log(response.data);
+  login(user) {
+
+    return axios.post(API_URL + 'api/user/login', {user}, defaultConfig()).then(response =>{
       if(response.data.token){
           localStorage.setItem("user", JSON.stringify(response.data));
       }
@@ -27,7 +25,6 @@ class UserService {
         return {fetchError: {error, errorMsg: 'Please Try Again Later'}};
     });
 
-    return login;
   }
 
   getCurrentUser() {

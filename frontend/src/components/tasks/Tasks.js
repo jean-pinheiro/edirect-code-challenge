@@ -29,12 +29,13 @@ class Tasks extends Component {
     this.setState({ fetchError: false, fetchMsg: '' });
     const { taskDescription } = this.state;
     if(taskDescription !== ''){
-
-      const addResponse = await TaskService.add(this.props.projectId, taskDescription);  
-      if(addResponse.fetchError){
+      try{
+      await TaskService.add(this.props.projectId, taskDescription); 
+      this.props.getTasks(); 
+      }catch(error){
         this.setState({fetchError: true, fetchMsg: addResponse.fetchError.errorMsg});
       }
-      this.props.getTasks();
+      
     }else{
       this.setState({fetchError: true, fetchMsg: "Please, type your task first"});
     }

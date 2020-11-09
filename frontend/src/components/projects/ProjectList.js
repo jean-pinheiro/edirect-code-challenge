@@ -28,21 +28,23 @@ class ProjectList extends Component {
 
   async listProjects() {
     this.setState({ fetchError: false});
-    let projects = await ProjectService.list(this.state.userId);
-    if (projects.fetchError) {
-      this.setState({ fetchError: true, fetchMsg: " again later" });
-    } else {
+    try {
+      let projects = await ProjectService.list(this.state.userId);
       this.setState({ projects });
+    } catch (error) {
+      this.setState({ fetchError: true, fetchMsg: " again later" });
     }
   }
   async deleteProject(projectId) {
     if (window.confirm(`Are you sure you want to delete this Project?`)) {
 
-      const deleteResponse = await ProjectService.delete(projectId);
-      if (deleteResponse.fetchError) {
-        this.setState({ fetchError: true, fetchMsg: deleteResponse.fetchError.errorMsg })
-      }
+      try {
+      await ProjectService.delete(projectId);
       this.listProjects();
+      } catch (error) {
+          this.setState({ fetchError: true, fetchMsg: error.errorMsg })
+      }
+      
     }
   }
 
@@ -55,11 +57,13 @@ class ProjectList extends Component {
     const {projectName} = this.state;
     if(projectName !== ''){
 
-      const addResponse = await ProjectService.add(this.state.userId, projectName);  
-      if(addResponse.fetchError){
-        this.setState({fetchError: true, fetchMsg: addResponse.fetchError.errorMsg});
+      try {
+      await ProjectService.add(this.state.userId, projectName); 
+      this.listProjects(); 
+      } catch(error){
+        this.setState({fetchError: true, fetchMsg: error.errorMsg});
       }
-      this.listProjects();
+      
     }else{
       this.setState({fetchError: true, fetchMsg: "Please, type your Project Name first"});
     }
@@ -96,13 +100,7 @@ class ProjectList extends Component {
                     <a className="delete" href="#">
                         <FontAwesomeIcon onClick={() => this.deleteProject(project._id)} icon={faTrashAlt} />
                     </a>
-                </span>
-                <span className="projectIcons">
-                    <a className="edit" href="#">
-                        <FontAwesomeIcon onClick={() => this.deleteProject(project._id)} icon={faEdit} />
-                    </a>
-                </span>
-                
+                </span>                
               </li>
             })
           }

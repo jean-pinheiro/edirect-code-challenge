@@ -32,12 +32,13 @@ class Register extends Component {
           if(user.password !== user.confirmPassword){
               this.setState({error:"The passwords are different!"})           
           }else{
-            const registerResponse = await UserService.register(user);
-            if (registerResponse.fetchError) {
-                this.setState({ fetchError: true, error: registerResponse.fetchError.errorMsg })
-            }else{
-                window.location="/";
-            }
+              try {
+                  await UserService.register(user);
+                  window.location="/";
+              } catch (error) {
+                this.setState({ fetchError: true, error: error.errorMsg })
+              }
+            
           }
         }else{
             this.setState({error:"Please, fill all the form"})

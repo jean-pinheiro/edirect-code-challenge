@@ -22,11 +22,11 @@ class Project extends Component {
 
   async getTasks() {
     let projectId = this.props.match.params.id;
-    let tasks = await TaskService.list(projectId);
-    if(tasks.fetchError){
-      this.setState({fetchError: true, fetchMsg:tasks.fetchError.errorMsg})
-    }else{
+    try {
+      let tasks = await TaskService.list(projectId);
       this.setState({tasks});
+    } catch (error) {
+      this.setState({fetchError: true, fetchMsg:error.errorMsg})
     }
   }
 

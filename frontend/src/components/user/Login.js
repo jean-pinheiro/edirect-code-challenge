@@ -27,12 +27,15 @@ class Login extends Component {
         e.preventDefault();
         const {user} = this.state;
         if(user !== {}){
-            const loginResponse = await UserService.login(user);
-            if (loginResponse.fetchError) {
-                this.setState({ fetchError: true, error: loginResponse.fetchError.errorMsg })
-            }else if(loginResponse.auth){
+            try {
+              const loginResponse = await UserService.login(user);
+              if(loginResponse.auth){
                 window.location="/projects";
-            }          
+              }              
+            } catch (error) {
+                this.setState({ fetchError: true, error: error.errorMsg })
+            }
+                   
         } else{
             this.setState({error:"Please, insert your Username and Password"})
         }

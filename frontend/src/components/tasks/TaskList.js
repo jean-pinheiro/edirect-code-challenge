@@ -22,23 +22,25 @@ class TaskList extends Component {
 
   async finishTask(taskId) {
     this.setState({ fetchError: false, fetchMsg: '' });
-
-    const finishResponse = await TaskService.finish(taskId);
-    if (finishResponse.fetchError) {
-      this.setState({ fetchError: true, fetchMsg: finishResponse.fetchError.errorMsg })
+    try {
+      await TaskService.finish(taskId);
+      this.props.getTasks();
+    } catch (error) {
+      this.setState({ fetchError: true, fetchMsg: error.errorMsg })
     }
-    this.props.getTasks();
+    
   }
 
   async deleteTask(taskId) {
     this.setState({ fetchError: false, fetchMsg: '' });
     if (window.confirm(`Are you sure you want to delete this task?`)) {
-
-      const deleteResponse = await TaskService.delete(taskId);
-      if (deleteResponse.fetchError) {
-        this.setState({ fetchError: true, fetchMsg: deleteResponse.fetchError.errorMsg })
+      try {
+        await TaskService.delete(taskId);
+        this.props.getTasks();
+      } catch (error) {
+        this.setState({ fetchError: true, fetchMsg: error.errorMsg })
       }
-      this.props.getTasks();
+      
     }
   }
 
