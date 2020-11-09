@@ -26,7 +26,7 @@ class userController{
           var token = jwt.sign({ id }, process.env.TOKEN, {
             expiresIn: 3000
           });
-          return res.json({ auth: true, token, user: findUser });
+          return res.json({ auth: true, token, authUser: findUser });
         }
         res.status(400).json({message: "Login unauthorized!"});
     } catch (error) {

@@ -21,6 +21,7 @@ class TaskList extends Component {
   }
 
   async finishTask(taskId) {
+    this.setState({ fetchError: false, fetchMsg: '' });
 
     const finishResponse = await TaskService.finish(taskId);
     console.log(finishResponse);
@@ -31,6 +32,7 @@ class TaskList extends Component {
   }
 
   async deleteTask(taskId) {
+    this.setState({ fetchError: false, fetchMsg: '' });
     if (window.confirm(`Are you sure you want to delete this task?`)) {
 
       const deleteResponse = await TaskService.delete(taskId);
@@ -59,14 +61,8 @@ class TaskList extends Component {
                 {this.props.tasks.map((task, index) => {
                   return <tr key={index}>
                     <td className="col-md-10">
-                      <span id={task._id} className={task.done ? 'task_done' : ''}>
-                        { this.state.edit ?
-                          <>
-
-                          </>
-                          :
-                          <>
-                          
+                      <span id={task._id} className={task.done ? 'task_done' : ''}>                        
+                          <>                          
                             {task.description}
                             <span className="tooltiptext ">
                             {
@@ -82,17 +78,7 @@ class TaskList extends Component {
                             }                                                                      
                             </span>
                           </>  
-                        }
                       </span>
-                    </td>
-                    <td>
-                      {
-                        task.done === false
-                          ? <a className="edit" href="#">
-                            <FontAwesomeIcon onClick={() => this.setState({edit: true, taskEdit: {task} })} icon={faEdit} />
-                          </a>
-                          : null
-                      }
                     </td>
                     <td>
                       {
@@ -118,6 +104,7 @@ class TaskList extends Component {
             </Table>
           </Card.Body>
         </Card>
+        <br></br>
       </div>
     );
   }

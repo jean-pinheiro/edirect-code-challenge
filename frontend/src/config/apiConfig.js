@@ -21,7 +21,8 @@ export function defaultConfig() {
 }
 
 export function authConfig() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user.token);
   return {
     headers: { 'Accept': 'application/json',
     'Content-Type': 'application/json',

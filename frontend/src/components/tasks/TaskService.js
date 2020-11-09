@@ -28,7 +28,7 @@ class TaskService {
 
   async finish(taskId) {
     
-    const addResponse = await axios.post(API_URL + `api/task/finish/${taskId}`,  authConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/task/finish/${taskId}`, {},  authConfig()).then(response =>{
         return response.data;
     }).catch(error =>{
         console.log(error);
@@ -40,7 +40,7 @@ class TaskService {
 
   async delete(taskId) {
     
-    const addResponse = await axios.post(API_URL + `api/task/delete/${taskId}`,  authConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/task/delete/${taskId}`, {},  authConfig()).then(response =>{
         return response.data;
     }).catch(error =>{
         console.log(error);

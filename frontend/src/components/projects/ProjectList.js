@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Button, Row , Col, Container, Card} from 'react-bootstrap';
 
-import ProjectService from './ProjectService'
+import ProjectService from './ProjectService';
+import UserService from '../user/UserService';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from "react-router-dom";
@@ -16,6 +17,7 @@ class ProjectList extends Component {
       fetchError: false,
       errorMsg: 'We had a problem on doing this now, please try ',
       fetchMsg: '',
+      userId: UserService.getCurrentUser().authUser._id,
       projectName: ''
     }
 
@@ -25,10 +27,12 @@ class ProjectList extends Component {
   }
 
   async listProjects() {
-    let projects = await ProjectService.list('5fa76cb39c848d23d22b66c3');
+    this.setState({ fetchError: false});
+    let projects = await ProjectService.list(this.state.userId);
     if (projects.fetchError) {
       this.setState({ fetchError: true, fetchMsg: " again later" });
     } else {
+      console.log(projects);
       this.setState({ projects });
     }
   }
@@ -49,10 +53,11 @@ class ProjectList extends Component {
 
   async handleAddProjectSubmit(e){
     e.preventDefault();
+    console.log(this.state)
     const {projectName} = this.state;
     if(projectName !== ''){
 
-      const addResponse = await ProjectService.add('5fa76cb39c848d23d22b66c3', projectName);  
+      const addResponse = await ProjectService.add(this.state.userId, projectName);  
       if(addResponse.fetchError){
         this.setState({fetchError: true, fetchMsg: addResponse.fetchError.errorMsg});
       }
@@ -62,22 +67,29 @@ class ProjectList extends Component {
     }
   }
 
-  componentDidMount() {
-    this.listProjects();
+  componentDidMount() {    
+    const user = UserService.getCurrentUser();
+    if(user){
+      this.setState({userId: user.authUser._id}, function () { console.log(this.state)});
+      this.listProjects();
+    }else{
+        window.location='/login';
+    }
   }
 
   render() {
-    const { projects } = this.state;
-    const fetchError = (!this.state.fetchError) ? '' : (
+    const { projects, fetchError  } = this.state;
+    const error = (!fetchError) ? '' : (
       <React.Fragment>
         <br />
-        <span className="error_msg">{this.state.fetchMsg}</span>
+        <span className="error_msg">{this.state.errorMsg +this.state.fetchMsg}</span>
         <br />
       </React.Fragment>
     );
-    const listProjects = (this.state.fetchError) ? '' : (
+    const listProjects = 
+    (
       <React.Fragment>
-        <ul>
+         <ul>
           {
             projects.map((project, index) => {
               return <li key={index}>
@@ -96,7 +108,7 @@ class ProjectList extends Component {
               </li>
             })
           }
-        </ul>
+        </ul> 
       </React.Fragment>
     );
     return (
@@ -106,7 +118,7 @@ class ProjectList extends Component {
             <p className="title">Your Projects</p>
             <Card>
               <Card.Body>
-                {fetchError}
+                {error}
                 {listProjects}
 
               </Card.Body>

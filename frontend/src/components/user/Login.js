@@ -34,12 +34,19 @@ class Login extends Component {
             }else if(loginResponse.auth){
                 console.log(localStorage.getItem('authToken'));
 
-                //window.location="/";
+                window.location="/projects";
             }          
         } else{
             this.setState({error:"Please, insert your Username and Password"})
         }
     }
+
+    componentDidMount(){
+        const user = UserService.getCurrentUser();
+        if(user){        
+          window.location='/projects';
+        }
+      }
     render() {
         return (
           <Container>

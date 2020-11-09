@@ -77,3 +77,20 @@ $red: #EE4525;
 .projectIcons{
   float: right;
 }
+
+.user_info{
+  color: $light-blue;  
+}
+
+.user_logout{
+  color: black;
+  cursor: pointer;
+}
+
+.user_logout:hover{
+  color: $light-blue;
+}
+
+.start_adding{
+  font-style: italic;
+}

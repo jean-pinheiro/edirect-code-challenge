@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_URL, defaultConfig} from '../../config/apiConfig';
+import {API_URL, authConfig, defaultConfig} from '../../config/apiConfig';
 
 class ProjectService {
 
@@ -17,7 +17,7 @@ class ProjectService {
 
   async add(userId, projectName) {
     
-    const addResponse = await axios.post(API_URL + `api/project/add/${userId}`, {projectName}, defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/project/add/${userId}`, {projectName}, authConfig()).then(response =>{
         console.log(response.data);
         return response.data;
     }).catch(error =>{
@@ -30,7 +30,7 @@ class ProjectService {
 
   async delete(projectId) {
     
-    const addResponse = await axios.post(API_URL + `api/project/delete/${projectId}`, defaultConfig()).then(response =>{
+    const addResponse = await axios.post(API_URL + `api/project/delete/${projectId}`, {}, authConfig()).then(response =>{
         console.log(response.data);
         return response.data;
     }).catch(error =>{

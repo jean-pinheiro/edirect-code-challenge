@@ -19,12 +19,14 @@ class Tasks extends Component {
   }
 
   handleAddTaskChange(e){
+    this.setState({ fetchError: false, fetchMsg: '' });
     this.setState({taskDescription: e.target.value});
     
   }
 
   async handleAddTaskSubmit(e){
     e.preventDefault();
+    this.setState({ fetchError: false, fetchMsg: '' });
     const { taskDescription } = this.state;
     if(taskDescription !== ''){
 
